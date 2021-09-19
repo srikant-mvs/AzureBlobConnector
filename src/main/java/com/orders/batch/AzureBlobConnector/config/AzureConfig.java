@@ -7,11 +7,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Data
-@Configuration("azureBlobServiceConfig")
-@ConfigurationProperties("azurestorageservice")
-public class AzureBlobServiceConfig {
+@Configuration("azureConfig")
+@ConfigurationProperties("azurestorageblobservice")
+public class AzureConfig {
 
-  private Map<String, AzureStorageContainerConfig> config = new HashMap<>();
+  private Map<String, AzureStorageBlobServiceConfig> config = new HashMap<>();
+
   private String uploadErrorFileFromPath;
+  private String accountName;
+  private String accountKey;
 
 }

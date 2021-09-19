@@ -3,7 +3,7 @@ package com.orders.batch.AzureBlobConnector.config;
 import lombok.Data;
 
 @Data
-public class AzureStorageServiceConfig {
+public class AzureStorageBlobServiceConfig {
 
   private String routeId;
   private boolean enabled;
@@ -11,5 +11,6 @@ public class AzureStorageServiceConfig {
   private String requestContainer;
   private String responseContainer;
   private String errorContainer;
+  private String blobType;
 
 }

@@ -21,9 +21,9 @@ import org.springframework.stereotype.Service;
 
 @Data
 @Slf4j
-@Service("azureBlobProcessor")
+@Service("xmlBlobProcessor")
 @RequiredArgsConstructor
-public class AzureBlobProcessor implements Processor {
+public class XmlBlobProcessor implements Processor {
 
   private final BlobServiceClient blobServiceClient;
   private final AzureBlobUtils azureBlobUtils;
@@ -36,6 +36,7 @@ public class AzureBlobProcessor implements Processor {
    */
   @Override
   public void process(Exchange exchange) throws Exception {
+    log.info("Inside XML Blob Processor");
     ArrayList<BlobItem> orderBatchBlobItems = exchange.getIn().getBody(ArrayList.class);
 
     for(BlobItem blobItem : orderBatchBlobItems){

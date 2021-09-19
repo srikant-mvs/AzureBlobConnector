@@ -1,2 +1,7 @@
-package com.orders.batch.AzureBlobConnector.processor;public interface BlobProcessor {
+package com.orders.batch.AzureBlobConnector.processor;
+
+public interface BlobProcessor {
+
+  public void processContent();
+
 }
