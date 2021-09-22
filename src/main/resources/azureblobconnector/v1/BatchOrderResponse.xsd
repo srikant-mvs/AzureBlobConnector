@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest"
+        targetNamespace="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest" elementFormDefault="unqualified">
+    <include schemaLocation="Header.xsd"/>
+    <include schemaLocation="Response.xsd"/>
+
+    <element name="BatchOrderResponse">
+        <complexType>
+            <sequence>
+                <element name="ResponseHeader" type="tns:Header" minOccurs="1" maxOccurs="1"/>
+                <element name="ResponseBody" type="tns:Body" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="Body">
+        <sequence>
+            <element name="Response" type="tns:Response" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+</schema>

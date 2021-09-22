@@ -1,4 +1,4 @@
-package com.orders.batch.AzureBlobConnector.config;
+package com.batch.orders.AzureBlobConnector.config;
 
 import lombok.Data;
 

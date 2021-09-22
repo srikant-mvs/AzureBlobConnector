@@ -1,4 +1,4 @@
-package com.orders.batch.AzureBlobConnector.constant;
+package com.batch.orders.AzureBlobConnector.constant;
 
 public class AzureBlobConstants {
   public static final String AZURE_STORAGE_BLOB_SERVICE_CONFIG = "azureStorageBlobServiceConfig";

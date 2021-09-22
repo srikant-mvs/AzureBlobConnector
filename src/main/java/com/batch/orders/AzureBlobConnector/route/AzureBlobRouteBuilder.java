@@ -1,11 +1,11 @@
-package com.orders.batch.AzureBlobConnector.route;
+package com.batch.orders.AzureBlobConnector.route;
 
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.common.StorageSharedKeyCredential;
-import com.orders.batch.AzureBlobConnector.config.AzureConfig;
-import com.orders.batch.AzureBlobConnector.config.AzureStorageBlobServiceConfig;
-import com.orders.batch.AzureBlobConnector.constant.AzureBlobConstants;
+import com.batch.orders.AzureBlobConnector.config.AzureConfig;
+import com.batch.orders.AzureBlobConnector.config.AzureStorageBlobServiceConfig;
+import com.batch.orders.AzureBlobConnector.constant.AzureBlobConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +52,10 @@ public class AzureBlobRouteBuilder extends RouteBuilder {
         .append(azureStorageBlobServiceConfig.getRequestContainer())
         .append("?blobServiceClient=#blobServiceClient&operation=listBlobs").toString();
 
-    from("timer://testRoute?fixedRate=true&period=10s")
+    from("timer://"+azureStorageBlobServiceConfig.getRouteId()+"?fixedRate=true&period=10s")
         .routeId(azureStorageBlobServiceConfig.getRouteId())
         .to(camelUri)
         .setHeader(AzureBlobConstants.AZURE_STORAGE_BLOB_SERVICE_CONFIG, constant(azureStorageBlobServiceConfig))
-        .process("xmlBlobProcessor");
+        .process("azureBlobProcessor");
   }
 }

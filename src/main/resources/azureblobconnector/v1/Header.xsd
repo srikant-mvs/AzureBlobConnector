@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest"
+        targetNamespace="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest" elementFormDefault="unqualified">
+
+    <element name="Header" type="tns:Header"/>
+
+    <complexType name="Header">
+        <sequence>
+            <element name="RequestId" type="string"/>
+            <element name="DateTime" type="dateTime"/>
+            <element name="Source" type="string"/>
+        </sequence>
+    </complexType>
+</schema>

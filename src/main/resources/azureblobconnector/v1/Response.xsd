@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest"
+        targetNamespace="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest" elementFormDefault="unqualified">
+
+    <element name="Response" type="tns:Response"/>
+    <complexType name="Response">
+        <sequence>
+            <element name="PurchaseOrder" type="string" />
+        </sequence>
+    </complexType>
+</schema>

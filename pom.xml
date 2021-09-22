@@ -62,7 +62,22 @@
 		<dependency>
 			<groupId>com.azure</groupId>
 			<artifactId>azure-storage-blob</artifactId>
-			<version>12.13.0</version>
+			<version>12.14.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.azure</groupId>
+					<artifactId>azure-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-core</artifactId>
+			<version>1.20.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -89,8 +104,51 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
+				<configuration>
+					<mainClass>com.batch.orders.AzureBlobConnector.AzureBlobConnectorApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.5.0</version>
+				<executions>
+					<execution>
+						<id>xjc-BatchOrderRequest</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/resources/azureblobconnector/v1/BatchOrderRequest.xsd</source>
+							</sources>
+							<clearOutputDir>false</clearOutputDir>
+							<packageName>com.batch.orders.request</packageName>
+						</configuration>
+					</execution>
+					<execution>
+					<id>xjc-BatchOrderResponse</id>
+					<goals>
+						<goal>xjc</goal>
+					</goals>
+					<configuration>
+						<sources>
+							<source>src/main/resources/azureblobconnector/v1/BatchOrderResponse.xsd</source>
+						</sources>
+						<clearOutputDir>false</clearOutputDir>
+						<packageName>com.batch.orders.response</packageName>
+					</configuration>
+				</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

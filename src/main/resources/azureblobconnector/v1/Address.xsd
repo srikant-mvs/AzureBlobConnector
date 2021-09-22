@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest"
+        targetNamespace="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest" elementFormDefault="unqualified">
+
+    <element name="Address" type="tns:Address"/>
+    <complexType name="Address">
+        <sequence>
+            <element name="Street" type="string"/>
+            <element name="City" type="string"/>
+            <element name="Country" type="string"/>
+            <element name="PostalCode" type="string"/>
+        </sequence>
+    </complexType>
+</schema>

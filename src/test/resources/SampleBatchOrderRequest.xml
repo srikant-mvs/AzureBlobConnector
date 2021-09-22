@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:BatchOrderRequest xmlns:tns="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest">
+    <Header>
+        <RequestId>1234</RequestId>
+        <DateTime>2021-09-21T15:50:00</DateTime>
+        <Source>SCO</Source>
+    </Header>
+    <Body>
+        <BatchOrder>
+            <Orders>
+                <Order>
+                    <OrderDate>2021-09-21T15:50:00</OrderDate>
+                    <Product>
+                        <ProductID>HP Laptop</ProductID>
+                        <ProductDescription>Personal Laptop</ProductDescription>
+                    </Product>
+                    <Customer>
+                        <CustomerName>Srikant</CustomerName>
+                        <CustomerContact>0616214987</CustomerContact>
+                        <CustomerAddress>
+                            <Street>XXX 11</Street>
+                            <City>Amsterdam</City>
+                            <Country>Netherlands</Country>
+                            <PostalCode>1111 XX</PostalCode>
+                        </CustomerAddress>
+                    </Customer>
+                    <ShipTo>
+                        <ShipToName>Seshadri</ShipToName>
+                        <ShipToContact>XXXXX</ShipToContact>
+                        <ShipToAddress>
+                            <Street>XXXX</Street>
+                            <City>Bangalore</City>
+                            <Country>India</Country>
+                            <PostalCode>560037</PostalCode>
+                        </ShipToAddress>
+                    </ShipTo>
+                </Order>
+            </Orders>
+        </BatchOrder>
+    </Body>
+</tns:BatchOrderRequest>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest"
+        targetNamespace="http://com.batch.orders/batchorderservice/v1/BatchOrderRequest" elementFormDefault="unqualified">
+    <include schemaLocation="Customer.xsd"/>
+    <include schemaLocation="Product.xsd"/>
+    <include schemaLocation="ShipTo.xsd"/>
+
+    <element name="Order" type="tns:Order"/>
+
+    <complexType name="Order">
+        <sequence>
+            <element name="OrderDate" type="dateTime"/>
+            <element name="Product" type="tns:Product" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="Customer" type="tns:Customer" minOccurs="1" maxOccurs="1"/>
+            <element name="ShipTo" type="tns:ShipTo" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+</schema>
