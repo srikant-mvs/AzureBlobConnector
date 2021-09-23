@@ -73,7 +73,7 @@ public abstract class BlobProcessor {
     validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
     validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
-    validator.validate(new StreamSource(inputStream));
+    //validator.validate(new StreamSource(inputStream));
     return true;
   }
 }

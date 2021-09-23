@@ -9,6 +9,7 @@ import com.azure.storage.blob.specialized.BlobInputStream;
 import com.azure.storage.blob.specialized.BlobLeaseClient;
 import com.batch.orders.AzureBlobConnector.config.AzureStorageBlobServiceConfig;
 import com.batch.orders.AzureBlobConnector.constant.AzureBlobConstants;
+import com.batch.orders.AzureBlobConnector.exception.ServerUnavailableException;
 import com.batch.orders.AzureBlobConnector.service.AzureBlobService;
 import com.batch.orders.AzureBlobConnector.utils.AzureBlobUtils;
 import com.batch.orders.request.BatchOrderRequest;
@@ -69,7 +70,7 @@ public class AzureBlobProcessor implements Processor {
   }
 
   private void processBatchBlobs(BlobClient blobClient, BlobLeaseClient blobLeaseClient, AzureStorageBlobServiceConfig serviceConfig)
-          throws IOException, SAXException, XMLStreamException {
+          throws IOException, SAXException, XMLStreamException, ServerUnavailableException {
     BlobInputStream blobInputStream = blobClient.openInputStream();
     String blobContentAsString = blobProcessor.processContent(blobInputStream);
 
@@ -82,7 +83,7 @@ public class AzureBlobProcessor implements Processor {
   }
 
   private void generateBatchOrderResponse(BatchOrderRequest batchOrderRequest, BlobClient blobClient, BlobContainerClient responseBlobContainerClient)
-          throws XMLStreamException, IOException {
+          throws XMLStreamException, IOException, ServerUnavailableException {
     String batchOrderResponseXml = azureBlobService.getBatchOrderResponse(batchOrderRequest);
     log.debug("batchOrderResponseXml={}", batchOrderResponseXml);
     azureBlobUtils.uploadBlob(batchOrderResponseXml, blobClient.getBlobName(), responseBlobContainerClient);

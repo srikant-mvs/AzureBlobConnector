@@ -1,6 +1,7 @@
 package com.batch.orders.AzureBlobConnector.service;
 
 import com.batch.orders.AzureBlobConnector.config.MyServerConfig;
+import com.batch.orders.AzureBlobConnector.exception.ServerUnavailableException;
 import com.batch.orders.request.BatchOrderRequest;
 import com.batch.orders.response.*;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.camel.CamelExecutionException;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
@@ -31,7 +33,7 @@ public class AzureBlobService {
     private final ProducerTemplate producerTemplate;
     private final MyServerConfig myServerConfig;
 
-    public String getBatchOrderResponse(BatchOrderRequest batchOrderRequest) throws XMLStreamException, IOException {
+    public String getBatchOrderResponse(BatchOrderRequest batchOrderRequest) throws XMLStreamException, IOException, ServerUnavailableException {
 
         String purchaseOrder = generatePurchaseOrder();
 
@@ -41,9 +43,14 @@ public class AzureBlobService {
         return writeResponseToXml(batchOrderResponse);
     }
 
-    private String generatePurchaseOrder() {
-        String purchaseOrder = producerTemplate.requestBody(myServerConfig.getProcessOrderUrl(), "generatePurchaseOrder", String.class);
-        log.info("event=GeneratePurchaseOrderNumber, {}", purchaseOrder);
+    private String generatePurchaseOrder() throws ServerUnavailableException {
+        String purchaseOrder = "";
+        try{
+            purchaseOrder = producerTemplate.requestBody(myServerConfig.getProcessOrderUrl(), "generatePurchaseOrder", String.class);
+            log.info("event=GeneratePurchaseOrderNumber, {}", purchaseOrder);
+        } catch(CamelExecutionException e) {
+            throw new ServerUnavailableException("Exception={}", e);
+        }
         return purchaseOrder;
     }
 
