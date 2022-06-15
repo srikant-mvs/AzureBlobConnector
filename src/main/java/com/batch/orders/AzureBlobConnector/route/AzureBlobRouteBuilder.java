@@ -74,13 +74,6 @@ public class AzureBlobRouteBuilder extends RouteBuilder {
         .routePolicy(getThrotllingExceptionRoutePolicy())
         .setHeader(AzureBlobConstants.AZURE_STORAGE_BLOB_SERVICE_CONFIG, constant(azureStorageBlobServiceConfig))
         .process("azureBlobProcessor");
-
-    from("timer://pollAzureBlobSCORoute?fixedRate=true&period=10s")
-            .routeId("pollAzureBlobSCORoute")
-            .to("azure-storage-blob://myStorageAccountName/myContainerName" +
-                    "?blobServiceClient=#blobServiceClient&operation=listBlobs")
-            .routePolicy(getThrotllingExceptionRoutePolicy())
-            .process("azureBlobProcessor");
   }
 
   private ThrottlingExceptionRoutePolicy getThrotllingExceptionRoutePolicy() {
